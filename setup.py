@@ -22,6 +22,7 @@ setup(
     ],
     extras_require={
         'test': [
+            'python-dotenv',
             'pytest',
             'pytest-pylint',
             'requests-mock'
