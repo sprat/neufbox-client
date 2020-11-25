@@ -18,7 +18,6 @@ class ClientError(Exception):
         super().__init__(message)
 
 
-# TODO: handle post routes
 # TODO: complete the API namespaces
 class Client:
     """
@@ -74,18 +73,24 @@ class Client:
         """Logout: forget the current token"""
         self._token = None
 
-    def get(self, method, **parameters):
-        """Perform a GET request with a fully qualified method name"""
+    def _method_params(self, method):
         params = {'method': method}
         if self._token:
             params['token'] = self._token
+        return params
+
+    def get(self, method, **parameters):
+        """Perform a GET request with a fully qualified method name"""
+        params = self._method_params(method)
         params.update(parameters)
         response = self._session.get(self.api_url, params=params)
         return self._process_response(response)
 
     def post(self, method, **parameters):
         """Perform a POST request with a fully qualified method name"""
-        raise NotImplementedError()
+        params = self._method_params(method)
+        response = self._session.post(self.api_url, params=params, data=parameters)
+        return self._process_response(response)
 
     @staticmethod
     def _compute_hash(token, value):
@@ -100,19 +105,21 @@ class Client:
         """Process the API response"""
         response.raise_for_status()
 
-        payload = xmltodict.parse(
+        data = xmltodict.parse(
             response.text,
             dict_constructor=dict,
             attr_prefix='',
             postprocessor=_value_postprocessor
         )['rsp']
 
-        status = payload.pop('stat')
-        payload.pop('version', None)
+        status = data.pop('stat')
+        data.pop('version', None)
         if status == 'ok':
-            return next(iter(payload.values()))  # get the value of the remaining key
+            if not data:
+                return None
+            return next(iter(data.values()))  # get the value of the remaining key
 
-        error = payload['err']
+        error = data['err']
         raise ClientError(error['code'], error['msg'])
 
 
