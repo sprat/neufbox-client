@@ -1,12 +1,12 @@
 """
-Lan namespace module
+LAN namespace module
 """
 from ._base import Namespace, GetMethod, PostMethod
 
 
-class Lan(Namespace):
+class LAN(Namespace):
     """
-    Lan API namespace definition
+    LAN API namespace definition
     """
     __namespace__ = 'lan'
     add_dns_host = PostMethod('addDnsHost', params=['ip', 'name'])

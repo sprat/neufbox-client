@@ -1,12 +1,12 @@
 """
-WLan namespace module
+WLAN namespace module
 """
 from ._base import Namespace, GetMethod, PostMethod
 
 
-class WLan(Namespace):
+class WLAN(Namespace):
     """
-    WLan API namespace definition
+    WLAN API namespace definition
     """
     __namespace__ = 'wlan'
     enable = PostMethod('enable')

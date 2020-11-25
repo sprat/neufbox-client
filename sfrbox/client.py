@@ -6,7 +6,7 @@ import hmac
 import requests
 import xmltodict
 
-from .namespaces import Auth, Firewall, Lan, PPP, Wan, WLan
+from .namespaces import Auth, Firewall, LAN, PPP, WAN, WLAN
 
 
 class ClientError(Exception):
@@ -27,10 +27,10 @@ class Client:
     # namespaces
     auth = Auth.binding()
     firewall = Firewall.binding()
-    lan = Lan.binding()
+    lan = LAN.binding()
     ppp = PPP.binding()
-    wan = Wan.binding()
-    wlan = WLan.binding()
+    wan = WAN.binding()
+    wlan = WLAN.binding()
 
     def __init__(self, hostname):
         self.hostname = hostname

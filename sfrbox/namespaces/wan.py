@@ -1,12 +1,12 @@
 """
-Wan namespace module
+WAN namespace module
 """
 from ._base import Namespace, GetMethod
 
 
-class Wan(Namespace):
+class WAN(Namespace):
     """
-    Wan API namespace definition
+    WAN API namespace definition
     """
     __namespace__ = 'wan'
     get_info = GetMethod('getInfo')
