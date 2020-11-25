@@ -73,10 +73,11 @@ class Client:
 
     def get(self, method, **parameters):
         """Perform a GET request with a fully qualified method"""
-        response = self._session.get(self.api_url, params=dict(
-            method=method,
-            **parameters
-        ))
+        params = {'method': method}
+        if self._token:
+            params['token'] = self._token
+        params.update(parameters)
+        response = self._session.get(self.api_url, params=params)
         return self._process_response(response)
 
     @staticmethod
