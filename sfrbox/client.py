@@ -84,7 +84,7 @@ class Client:
         params = self._method_params(method)
         params.update(parameters)
         response = self._session.get(self.api_url, params=params)
-        return self._process_response(response)
+        return self._process_response(response, method.endswith('List'))
 
     def post(self, method, **parameters):
         """Perform a POST request with a fully qualified method name"""
@@ -101,7 +101,7 @@ class Client:
         return hmac.new(token_bytes, value_hash_bytes, hashlib.sha256).hexdigest()
 
     @staticmethod
-    def _process_response(response):
+    def _process_response(response, return_list=False):
         """Process the API response"""
         response.raise_for_status()
 
@@ -115,12 +115,24 @@ class Client:
         status = data.pop('stat')
         data.pop('version', None)
         if status == 'ok':
-            if not data:
-                return None
-            return next(iter(data.values()))  # get the value of the remaining key
+            # get the value of the remaining key, or None
+            value = next(iter(data.values())) if data else None
+            # convert to list if needed
+            if return_list:
+                value = _convert_to_list(value)
+            return value
 
         error = data['err']
         raise ClientError(error['code'], error['msg'])
+
+
+def _convert_to_list(value):
+    """Convert a value to a list if it's not already a list"""
+    if value is None:  # empty value
+        return []
+    if not isinstance(value, list):
+        return [value]  # single value
+    return value
 
 
 def _value_postprocessor(_, key, value):

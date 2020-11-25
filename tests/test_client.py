@@ -17,8 +17,8 @@ def test_api_url(client):
     assert client.api_url == 'http://192.168.1.1/api/1.0'
 
 
-def test_get_single_result_success(client, mock_get_request):
-    """Test that client.lan.get_info() returns a properly formatted dict"""
+def test_get_single_result(client, mock_get_request):
+    """Test that a method returning a single result returns a properly formatted dict"""
     mock_get_request('?method=lan.getInfo', 'lan.getInfo.xml')
 
     result = client.lan.get_info()
@@ -30,6 +30,41 @@ def test_get_single_result_success(client, mock_get_request):
         'dhcp_end': '192.168.1.100',
         'dhcp_lease': 86400
     }
+
+
+def test_get_empty_list_result(client, mock_get_request):
+    """Test that a method returning a list can return an empty list"""
+    mock_get_request('?method=lan.getDnsHostList', 'lan.getDnsHostList_empty.xml')
+    result = client.lan.get_dns_host_list()
+    assert result == []
+
+
+def test_get_single_item_list_result(client, mock_get_request):
+    """Test that a method returning a list can return an empty list"""
+    mock_get_request('?method=lan.getDnsHostList', 'lan.getDnsHostList_1item.xml')
+    result = client.lan.get_dns_host_list()
+    assert result == [
+        {
+            'ip': '192.168.1.10',
+            'name': 'host1.lan'
+        }
+    ]
+
+
+def test_get_two_items_list_result(client, mock_get_request):
+    """Test that a method returning a list can return an empty list"""
+    mock_get_request('?method=lan.getDnsHostList', 'lan.getDnsHostList_2items.xml')
+    result = client.lan.get_dns_host_list()
+    assert result == [
+        {
+            'ip': '192.168.1.10',
+            'name': 'host1.lan'
+        },
+        {
+            'ip': '192.168.1.11',
+            'name': 'host2.lan'
+        }
+    ]
 
 
 def test_login_success(client, mock_get_request):
