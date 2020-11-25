@@ -1,7 +1,7 @@
 """
 PPP namespace module
 """
-from ._base import Namespace, GetMethod
+from ._base import Namespace, GetMethod, PostMethod
 
 
 class PPP(Namespace):
@@ -11,4 +11,4 @@ class PPP(Namespace):
     __namespace__ = 'ppp'
     get_credentials = GetMethod('getCredentials')
     get_info = GetMethod('getInfo')
-    # TODO: set_credentials = PostMethod('setCredentials')
+    set_credentials = PostMethod('setCredentials', params=['login', 'password'])
