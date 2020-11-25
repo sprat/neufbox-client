@@ -73,7 +73,7 @@ class Client:
         self._token = None
 
     def get(self, method, **parameters):
-        """Perform a GET request with a fully qualified method"""
+        """Perform a GET request with a fully qualified method name"""
         params = {'method': method}
         if self._token:
             params['token'] = self._token
