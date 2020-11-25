@@ -7,7 +7,7 @@ import requests
 import xmltodict
 
 from .property import NamespaceProperty
-from .namespaces import Auth, Lan, PPP, Wan
+from .namespaces import Auth, Firewall, Lan, PPP, Wan
 
 
 class ClientError(Exception):
@@ -28,6 +28,7 @@ class Client:
 
     # namespaces
     auth = NamespaceProperty(Auth)
+    firewall = NamespaceProperty(Firewall)
     lan = NamespaceProperty(Lan)
     ppp = NamespaceProperty(PPP)
     wan = NamespaceProperty(Wan)
