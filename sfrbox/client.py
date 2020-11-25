@@ -81,6 +81,10 @@ class Client:
         response = self._session.get(self.api_url, params=params)
         return self._process_response(response)
 
+    def post(self, method, **parameters):
+        """Perform a POST request with a fully qualified method name"""
+        raise NotImplementedError()
+
     @staticmethod
     def _compute_hash(token, value):
         """Compute a password hash for a given token"""

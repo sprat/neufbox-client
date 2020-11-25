@@ -1,7 +1,7 @@
 """
 Wan namespace module
 """
-from ._base import Namespace, Method
+from ._base import Namespace, GetMethod
 
 
 class Wan(Namespace):
@@ -9,4 +9,4 @@ class Wan(Namespace):
     Wan API namespace definition
     """
     __namespace__ = 'wan'
-    get_info = Method('getInfo')
+    get_info = GetMethod('getInfo')

@@ -1,7 +1,7 @@
 """
 Auth namespace module
 """
-from ._base import Namespace, Method
+from ._base import Namespace, GetMethod
 
 
 class Auth(Namespace):
@@ -9,5 +9,5 @@ class Auth(Namespace):
     Auth API namespace definition
     """
     __namespace__ = 'auth'
-    get_token = Method('getToken')
-    check_token = Method('checkToken', params=['token', 'hash'])
+    get_token = GetMethod('getToken')
+    check_token = GetMethod('checkToken', params=['token', 'hash'])
