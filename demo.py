@@ -20,6 +20,9 @@ def main():
     print('LAN info:')
     pprint(client.lan.get_info())
 
+    print('PPP info:')
+    pprint(client.ppp.get_info())
+
     print('WAN info:')
     pprint(client.wan.get_info())
 
