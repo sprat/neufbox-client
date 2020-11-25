@@ -6,7 +6,6 @@ import hmac
 import requests
 import xmltodict
 
-from .property import NamespaceProperty
 from .namespaces import Auth, Firewall, Lan, PPP, Wan, WLan
 
 
@@ -26,12 +25,12 @@ class Client:
     """
 
     # namespaces
-    auth = NamespaceProperty(Auth)
-    firewall = NamespaceProperty(Firewall)
-    lan = NamespaceProperty(Lan)
-    ppp = NamespaceProperty(PPP)
-    wan = NamespaceProperty(Wan)
-    wlan = NamespaceProperty(WLan)
+    auth = Auth.binding()
+    firewall = Firewall.binding()
+    lan = Lan.binding()
+    ppp = PPP.binding()
+    wan = Wan.binding()
+    wlan = WLan.binding()
 
     def __init__(self, hostname):
         self.hostname = hostname
