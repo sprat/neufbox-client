@@ -3,6 +3,7 @@ API Namespaces
 """
 from  .auth import Auth
 from .firewall import Firewall
+from .ftth import FTTH
 from .lan import LAN
 from .ppp import PPP
 from .smb import SMB
