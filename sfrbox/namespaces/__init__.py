@@ -2,6 +2,7 @@
 API Namespaces
 """
 from  .auth import Auth
+from .dsl import DSL
 from .firewall import Firewall
 from .ftth import FTTH
 from .lan import LAN
