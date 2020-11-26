@@ -6,6 +6,7 @@ from .dsl import DSL
 from .firewall import Firewall
 from .ftth import FTTH
 from .lan import LAN
+from .p910nd import P910ND
 from .ppp import PPP
 from .smb import SMB
 from .tv import TV
