@@ -7,3 +7,4 @@ from .lan import LAN
 from .ppp import PPP
 from .wan import WAN
 from .wlan import WLAN
+from .wlan5 import WLAN5
