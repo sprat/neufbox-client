@@ -14,6 +14,7 @@ from .smb import SMB
 from .system import System
 from .tv import TV
 from .usb import USB
+from .voip import VoIP
 from .wan import WAN
 from .wlan import WLAN
 from .wlan5 import WLAN5
