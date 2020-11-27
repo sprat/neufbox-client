@@ -11,6 +11,7 @@ from .ont import ONT
 from .p910nd import P910ND
 from .ppp import PPP
 from .smb import SMB
+from .system import System
 from .tv import TV
 from .usb import USB
 from .wan import WAN
