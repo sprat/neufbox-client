@@ -8,6 +8,7 @@ from .dsl import DSL
 from .firewall import Firewall
 from .ftth import FTTH
 from .guest import Guest
+from .hostspot import Hotspot
 from .lan import LAN
 from .ont import ONT
 from .p910nd import P910ND

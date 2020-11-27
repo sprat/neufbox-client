@@ -6,7 +6,7 @@ import hmac
 import requests
 import xmltodict
 
-from .namespaces import Auth, Backup3g, DDNS, DSL, Firewall, FTTH, Guest, \
+from .namespaces import Auth, Backup3g, DDNS, DSL, Firewall, FTTH, Guest, Hotspot, \
     LAN, ONT, P910ND, PPP, SMB, System, TV, USB, VoIP, WAN, WLAN, WLAN5
 
 
@@ -18,7 +18,6 @@ class ClientError(Exception):
         super().__init__(message)
 
 
-# TODO: complete the API namespaces
 class Client:
     """
     SFR Box API client
@@ -33,6 +32,7 @@ class Client:
     firewall = Firewall.binding()
     ftth = FTTH.binding()
     guest = Guest.binding()
+    hotspot = Hotspot.binding()
     lan = LAN.binding()
     ont = ONT.binding()
     p910nd = P910ND.binding()
