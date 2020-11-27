@@ -6,7 +6,7 @@ import hmac
 import requests
 import xmltodict
 
-from .namespaces import Auth, DSL, Firewall, FTTH, Guest, LAN, P910ND, PPP, SMB, TV, USB, WAN, WLAN, WLAN5
+from .namespaces import Auth, DSL, Firewall, FTTH, Guest, LAN, ONT, P910ND, PPP, SMB, TV, USB, WAN, WLAN, WLAN5
 
 
 class ClientError(Exception):
@@ -31,6 +31,7 @@ class Client:
     ftth = FTTH.binding()
     guest = Guest.binding()
     lan = LAN.binding()
+    ont = ONT.binding()
     p910nd = P910ND.binding()
     ppp = PPP.binding()
     smb = SMB.binding()

@@ -27,9 +27,10 @@ class Method(ABC):
 
     _client_method = ''
 
-    def __init__(self, name, params=None):
+    def __init__(self, name, params=None, optional_params=None):
         self.name = name
         self.params = params or []
+        self.optional_params = optional_params or []
 
     def _call(self, namespace, **kwargs):
         qualified_name = f'{namespace.__namespace__}.{self.name}'
