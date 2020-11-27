@@ -6,7 +6,7 @@ import hmac
 import requests
 import xmltodict
 
-from .namespaces import Auth, Backup3g, DSL, Firewall, FTTH, Guest, \
+from .namespaces import Auth, Backup3g, DDNS, DSL, Firewall, FTTH, Guest, \
     LAN, ONT, P910ND, PPP, SMB, System, TV, USB, VoIP, WAN, WLAN, WLAN5
 
 
@@ -28,6 +28,7 @@ class Client:
     # namespaces
     auth = Auth.binding()
     backup3g = Backup3g.binding()
+    ddns = DDNS.binding()
     dsl = DSL.binding()
     firewall = Firewall.binding()
     ftth = FTTH.binding()
