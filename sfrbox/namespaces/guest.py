@@ -1,7 +1,7 @@
 """
 Guest namespace module
 """
-from ._base import Namespace, GetMethod, PostMethod
+from ._base import Namespace, GetMethod, PostMethod, Parameter
 
 
 class Guest(Namespace):
@@ -12,5 +12,9 @@ class Guest(Namespace):
     get_info = GetMethod('getInfo')
     enable = PostMethod('enable')
     disable = PostMethod('disable')
-    set_ssid = PostMethod('setSsid', params=['ssid'])
-    set_wpa_key = PostMethod('setWpakey', params=['wpakey'])
+    set_ssid = PostMethod('setSsid', parameters=[
+        Parameter('ssid')
+    ])
+    set_wpa_key = PostMethod('setWpakey', parameters=[
+        Parameter('wpakey')
+    ])

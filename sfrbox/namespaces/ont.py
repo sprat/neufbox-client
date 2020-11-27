@@ -1,7 +1,7 @@
 """
 ONT namespace module
 """
-from ._base import Namespace, GetMethod, PostMethod
+from ._base import Namespace, GetMethod, PostMethod, Parameter
 
 
 class ONT(Namespace):
@@ -11,5 +11,9 @@ class ONT(Namespace):
     __namespace__ = 'ont'
     get_info = GetMethod('getInfo')
     sync = PostMethod('sync')
-    push = PostMethod('push', params=['name', 'value'], optional_params=['force'])
+    push = PostMethod('push', parameters=[
+        Parameter('name'),
+        Parameter('value'),
+        Parameter('force', mandatory=False)
+    ])
     pull = GetMethod('pull')

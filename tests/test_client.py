@@ -19,9 +19,10 @@ def test_api_url(client):
 
 def test_get_single_result(client, mock_get_request):
     """Test that a method returning a single result returns a properly formatted dict"""
-    mock_get_request('?method=lan.getInfo', 'lan.getInfo.xml')
+    mock = mock_get_request('?method=lan.getInfo', 'lan.getInfo.xml')
 
     result = client.lan.get_info()
+    assert mock.called_once
     assert result == {
         'ip_addr': '192.168.1.1',
         'netmask': '255.255.255.0',
@@ -94,3 +95,42 @@ def test_login_failure(client, mock_get_request):
     assert client._token is None
     assert error.value.code == 204
     assert str(error.value) == 'Invalid login and/or password'
+
+
+def test_missing_parameter(client):
+    """Check that an error is raised when a parameter is missing"""
+    with pytest.raises(TypeError):
+        client.wlan.set_wl0_enc()
+
+
+def test_invalid_parameter_name(client):
+    """Check that an error is raised when an invalid parameter is used"""
+    with pytest.raises(TypeError):
+        client.wlan.set_wl0_enc(invalid='value')
+
+
+def test_invalid_parameter_value(client):
+    """Check that an error is raised when an invalid value is provided in a parameter"""
+    with pytest.raises(ValueError):
+        client.wlan.set_wl0_enc(enc='invalid')
+
+
+def test_valid_string_parameter_value(client, mock_post_request):
+    """Check that the method is called when a valid string parameter value is provided """
+    mock = mock_post_request('?method=wlan.setWl0Enc')
+    client.wlan.set_wl0_enc(enc='WPA2-PSK')
+    assert mock.called_once
+
+
+def test_valid_int_parameter_value(client, mock_post_request):
+    """Check that integer parameters are converted to string and method is called"""
+    mock = mock_post_request('?method=wlan.setChannel')
+    client.wlan.set_channel(channel=12)
+    assert mock.last_request.text == 'channel=12'
+
+
+def test_missing_optional_parameter(client, mock_post_request):
+    """Check that no error is raised when an optional parameter is not passed"""
+    mock = mock_post_request('?method=ont.push')
+    client.ont.push(name='slid', value='1234')
+    assert mock.called_once

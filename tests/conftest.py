@@ -26,3 +26,11 @@ def mock_get_request(client, requests_mock):
     def func(url_query, xml_filename):
         return requests_mock.get(f'{client.api_url}{url_query}', text=read_xml(xml_filename))
     return func
+
+
+@pytest.fixture
+def mock_post_request(client, requests_mock):
+    """Mock a POST request to the API"""
+    def func(url_query):
+        return requests_mock.post(f'{client.api_url}{url_query}', text=read_xml('empty.xml'))
+    return func

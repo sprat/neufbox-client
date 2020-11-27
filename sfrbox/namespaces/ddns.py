@@ -1,7 +1,7 @@
 """
 DDNS namespace module
 """
-from ._base import Namespace, GetMethod, PostMethod
+from ._base import Namespace, GetMethod, PostMethod, Parameter, regexp
 
 
 class DDNS(Namespace):
@@ -13,5 +13,9 @@ class DDNS(Namespace):
     enable = PostMethod('enable')
     force_update = PostMethod('forceUpdate')
     get_info = GetMethod('getInfo')
-    set_service = PostMethod('setService', params=['service', 'username', 'password', 'hostname'])
-    # service: (dyndns|no-ip|ovh|dyndnsit|changeip|sitelutions)
+    set_service = PostMethod('setService', parameters=[
+        Parameter('service', regexp('dyndns|no-ip|ovh|dyndnsit|changeip|sitelutions')),
+        Parameter('username'),
+        Parameter('password'),
+        Parameter('hostname')
+    ])

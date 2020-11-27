@@ -1,7 +1,7 @@
 """
 System namespace module
 """
-from ._base import Namespace, GetMethod, PostMethod
+from ._base import Namespace, GetMethod, PostMethod, Parameter, regexp
 
 
 class System(Namespace):
@@ -13,5 +13,9 @@ class System(Namespace):
     get_if_list = GetMethod('getIfList')
     get_wpa_key = GetMethod('getWpaKey')
     reboot = PostMethod('reboot')
-    set_net_mode = PostMethod('setNetMode', params=['mode'])
-    set_ref_client = PostMethod('setRefClient', params=['refclient'])
+    set_net_mode = PostMethod('setNetMode', parameters=[
+        Parameter('mode', regexp('router|bridge'))
+    ])
+    set_ref_client = PostMethod('setRefClient', parameters=[
+        Parameter('refclient')
+    ])
