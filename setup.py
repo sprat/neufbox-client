@@ -4,11 +4,21 @@ Neufbox API Client
 from setuptools import setup
 
 
+with open('README.md', 'r') as readme_file:
+    LONG_DESCRIPTION = readme_file.read()
+
+
 setup(
     name='neufbox-client',
     description='Neufbox API Client',
+    author='Sylvain Prat',
+    author_email='sylvain.prat+neufbox-client@gmail.com',
+    long_description=LONG_DESCRIPTION,
+    long_description_content_type="text/markdown",
     license='MIT License',
     keywords='neuf, sfr, redbysfr, box, api, client',
+    url='https://github.com/sprat/neufbox-client',
+    download_url='https://pypi.python.org/pypi/neufbox-client',
     use_scm_version=True,
     setup_requires=[
         'setuptools_scm',
@@ -29,6 +39,7 @@ setup(
             'requests-mock'
         ],
     },
+    python_requires='>=3.0',
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',
