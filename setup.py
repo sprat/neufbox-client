@@ -1,14 +1,14 @@
 """
-SFR Box API Client
+Neufbox API Client
 """
 from setuptools import setup
 
 
 setup(
-    name='sfrbox-client',
-    description='SFR Box API Client',
+    name='neufbox-client',
+    description='Neufbox API Client',
     license='MIT License',
-    keywords='sfr, box, api, client',
+    keywords='neuf, sfr, redbysfr, box, api, client',
     use_scm_version=True,
     setup_requires=[
         'setuptools_scm',
@@ -18,7 +18,7 @@ setup(
         'xmltodict'
     ],
     packages=[
-        'sfrbox'
+        'neufbox'
     ],
     extras_require={
         'test': [

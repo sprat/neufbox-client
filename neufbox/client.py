@@ -11,7 +11,7 @@ from .namespaces import Auth, Backup3g, DDNS, DSL, Firewall, FTTH, Guest, Hotspo
 
 
 class ClientError(Exception):
-    """SFR Box API Error"""
+    """Neufbox API Error"""
 
     def __init__(self, code, message):
         self.code = code
@@ -19,10 +19,7 @@ class ClientError(Exception):
 
 
 class Client:
-    """
-    SFR Box API client
-    See https://lafibre.info/sfr-les-news/spec-api-rest-box-de-sfr/?action=dlattach;attach=85818
-    """
+    """Neufbox API client"""
 
     # namespaces
     auth = Auth.binding()

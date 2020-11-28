@@ -4,15 +4,15 @@ Test script
 import os
 from pprint import pprint
 from dotenv import load_dotenv
-from sfrbox import Client, username_password
+from neufbox import Client, username_password
 
 
 def main():
     """Main program"""
     load_dotenv()
-    hostname = os.getenv('SFRBOX_HOSTNAME')
-    username = os.getenv('SFRBOX_USERNAME')
-    password = os.getenv('SFRBOX_PASSWORD')
+    hostname = os.getenv('NEUFBOX_HOSTNAME')
+    username = os.getenv('NEUFBOX_USERNAME')
+    password = os.getenv('NEUFBOX_PASSWORD')
 
     client = Client(hostname)
     client.login(username_password(username, password))

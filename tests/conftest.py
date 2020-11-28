@@ -4,7 +4,7 @@ Fixtures for tests
 # pylint: disable=redefined-outer-name
 import pytest
 import pkg_resources
-from sfrbox import Client
+from neufbox import Client
 
 
 @pytest.fixture

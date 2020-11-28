@@ -1,5 +1,5 @@
 """
-SFR Box Root module
+Neufbox Client root module
 """
 from .client import Client, ClientError
 from .auth import username_password

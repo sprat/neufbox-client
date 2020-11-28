@@ -3,12 +3,12 @@ Client tests
 """
 # pylint: disable=protected-access,unused-argument
 import pytest
-from sfrbox import Client, ClientError, username_password
+from neufbox import ClientError, username_password
 
 
-def test_compute_hash():
+def test_compute_hash(client):
     """Check that the hash computation match the example given in the documentation"""
-    result = Client._compute_hash('43f6168e635b9a90774cc4d3212d5703c11c9302', 'admin')
+    result = client._compute_hash('43f6168e635b9a90774cc4d3212d5703c11c9302', 'admin')
     assert result == '7aa3e8b3ed7dfd7796800b4c4c67a0c56c5e4a66502155c17a7bcef5ae945ffa'
 
 
