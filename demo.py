@@ -17,14 +17,22 @@ def main():
     client = Client(hostname)
     client.login(username_password(username, password))
 
+    print('System info:')
+    pprint(client.system.get_info())
+    print()
+
+    print('DSL info:')
+    pprint(client.dsl.get_info())
+    print()
+
     print('LAN info:')
     pprint(client.lan.get_info())
-
-    print('PPP info:')
-    pprint(client.ppp.get_info())
+    print()
 
     print('WAN info:')
     pprint(client.wan.get_info())
+    print()
+
 
 
 if __name__ == '__main__':
