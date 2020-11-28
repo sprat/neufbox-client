@@ -24,6 +24,7 @@ setup(
         'test': [
             'python-dotenv',
             'pytest',
+            'pytest-cov',
             'pytest-pylint',
             'requests-mock'
         ],
