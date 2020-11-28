@@ -68,13 +68,13 @@ def test_get_two_items_list_result(client, mock_get_request):
     ]
 
 
-def test_login_success(client, mock_get_request):
+def test_login_success(client, mock_get_request, mock_post_request):
     """Check that we can login if the username/password are correct"""
-    mock_get_request('?method=auth.getToken', 'auth.getToken.xml')
+    get_token_mock = mock_get_request('?method=auth.getToken', 'auth.getToken.xml')
     check_mock = mock_get_request('?method=auth.checkToken', 'auth.checkToken_ok.xml')
 
     client.login(username_password('admin', 'password'))
-    assert client._token == 'fe5be7az1v9cb45zeogger8b4re145g3'
+    assert 'token' not in get_token_mock.last_request.qs
 
     # check that the hash value sent to the API is correct
     hash_value = check_mock.last_request.qs['hash'][0]
@@ -82,6 +82,19 @@ def test_login_success(client, mock_get_request):
         '2df1e5ddeba2c14262e594c62effd0ecf80ff09a02d223c381487e4a5851302f'
         '0a4d44947b410abbec4ab1da8b6de783d10f8284fcf528ae7c91c4b8ffd91fc5'
     )
+
+    # check that the token is passed in the next request
+    add_dns_host_mock = mock_post_request('?method=lan.addDnsHost')
+    client.lan.add_dns_host(name='host.lan', ip='192.168.1.25')
+    assert add_dns_host_mock.called_once
+    assert add_dns_host_mock.last_request.qs['token'][0] == 'fe5be7az1v9cb45zeogger8b4re145g3'
+
+    # logout
+    client.logout()
+
+    # check that the token is not passed anymore
+    client.lan.add_dns_host(name='host.lan', ip='192.168.1.25')
+    assert 'token' not in add_dns_host_mock.last_request.qs
 
 
 def test_login_failure(client, mock_get_request):
@@ -134,3 +147,9 @@ def test_missing_optional_parameter(client, mock_post_request):
     mock = mock_post_request('?method=ont.push')
     client.ont.push(name='slid', value='1234')
     assert mock.called_once
+
+
+def test_ip_validation_failure(client, mock_post_request):
+    """Check that the ip validation works"""
+    with pytest.raises(ValueError):
+        client.lan.add_dns_host(name='host.lan', ip='192.168.1.256')
