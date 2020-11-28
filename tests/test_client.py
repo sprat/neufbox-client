@@ -68,9 +68,9 @@ def test_get_two_items_list_result(client, mock_get_request):
     ]
 
 
-def test_login_success(client, mock_get_request, mock_post_request):
+def test_login_success_with_passwd(client, mock_get_request, mock_post_request):
     """Check that we can login if the username/password are correct"""
-    get_token_mock = mock_get_request('?method=auth.getToken', 'auth.getToken.xml')
+    get_token_mock = mock_get_request('?method=auth.getToken', 'auth.getToken_passwd.xml')
     check_mock = mock_get_request('?method=auth.checkToken', 'auth.checkToken_ok.xml')
 
     client.login(username_password('admin', 'password'))
@@ -99,8 +99,8 @@ def test_login_success(client, mock_get_request, mock_post_request):
 
 def test_login_failure(client, mock_get_request):
     """Check that we cannot login if the username/password are incorrect"""
-    mock_get_request('?method=auth.getToken', 'auth.getToken.xml')
-    mock_get_request('?method=auth.checkToken', 'auth.checkToken_fail.xml')
+    mock_get_request('?method=auth.getToken', 'auth.getToken_passwd.xml')
+    mock_get_request('?method=auth.checkToken', 'auth.checkToken_invalid_login_password.xml')
 
     with pytest.raises(ClientError) as error:
         client.login(username_password('admin', 'password'))
