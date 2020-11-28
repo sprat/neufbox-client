@@ -8,6 +8,6 @@ def username_password(username, password):
     def get(method):
         if method in ('passwd', 'all'):
             return (username, password)
-        return None
+        raise RuntimeError("username_password does not support 'button' authentication method")
 
     return get

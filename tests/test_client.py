@@ -97,7 +97,7 @@ def test_login_success_with_passwd(client, mock_get_request, mock_post_request):
     assert 'token' not in add_dns_host_mock.last_request.qs
 
 
-def test_login_failure(client, mock_get_request):
+def test_login_failure_invalid_password(client, mock_get_request):
     """Check that we cannot login if the username/password are incorrect"""
     mock_get_request('?method=auth.getToken', 'auth.getToken_passwd.xml')
     mock_get_request('?method=auth.checkToken', 'auth.checkToken_invalid_login_password.xml')
@@ -108,6 +108,14 @@ def test_login_failure(client, mock_get_request):
     assert client._token is None
     assert error.value.code == 204
     assert str(error.value) == 'Invalid login and/or password'
+
+
+def test_login_failure_with_login_password_in_button_method(client, mock_get_request):
+    """Check that we cannot login with username/password if the method is 'button'"""
+    mock_get_request('?method=auth.getToken', 'auth.getToken_button.xml')
+
+    with pytest.raises(RuntimeError):
+        client.login(username_password('admin', 'password'))
 
 
 def test_missing_parameter(client):
