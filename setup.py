@@ -1,7 +1,7 @@
 """
 Neufbox API Client
 """
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 with open('README.md', 'r') as readme_file:
@@ -27,9 +27,7 @@ setup(
         'requests',
         'xmltodict'
     ],
-    packages=[
-        'neufbox'
-    ],
+    packages=find_packages(),
     extras_require={
         'test': [
             'python-dotenv',
@@ -40,6 +38,7 @@ setup(
         ],
     },
     python_requires='>=3.6',
+    platforms='any',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
