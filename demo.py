@@ -33,6 +33,9 @@ def main():
     pprint(client.wan.get_info())
     print()
 
+    print('WLAN info:')
+    pprint(client.wlan.get_info())
+    print()
 
 
 if __name__ == '__main__':

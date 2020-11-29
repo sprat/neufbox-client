@@ -21,7 +21,7 @@ pip install neufbox-client
 
 Here is a simple example that retrieves the neufbox "system" information:
 ```python
-from neufbox import Client
+from neufbox import Client, username_password
 from pprint import pprint
 
 
@@ -32,14 +32,14 @@ pprint(system_info)
 
 We can also login to access private information from the neufbox. A ` username_password` helper is provided by the library, which sends the credentials (in hashed format) to validate the token received by the client from the neufbox (only if the neufbox allows username/password authentication):
 ```python
-from neufbox import username_password
-
 client.login(username_password('admin', 'p4ssw0rd'))
 wlan_info = client.wlan.get_info()
 pprint(wlan_info)
 ```
 
 The client also allows changing some parameters of the neufbox by using the setters available in the different namespaces. See the [API specification][api_spec_link] for details.
+
+You can also have a look on the [demo](./demo.py) file to see a working example.
 
 
 ## Support
