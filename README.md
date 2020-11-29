@@ -25,7 +25,7 @@ from neufbox import Client, username_password
 from pprint import pprint
 
 
-client = Client('192.168.0.1')
+client = Client('192.168.1.1')
 system_info = client.system.get_info()
 pprint(system_info)
 ```
