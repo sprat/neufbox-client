@@ -1,10 +1,12 @@
 # Neufbox API Client
 
-[![Build Status][travis_image]][travis_link]
+[![Build Status][build_badge]][travis_link]
+[![License][license_badge]][pypi_link]
+[![Version][version_badge]][pypi_link]
 
 This is a python API client library to interact with Neufbox NB4, NB5, NB6, NB6V, NB6VAC modem/routers sold by Neuf Telecom, SFR or Red by SFR companies.
 
-See https://lafibre.info/sfr-les-news/spec-api-rest-box-de-sfr/?action=dlattach;attach=85818 for details about the API itself.
+See the [API specification][api_spec_link] for details about the API itself.
 
 
 ## Installation
@@ -15,9 +17,29 @@ pip install neufbox-client
 ```
 
 
-## Usage
+## Getting started
 
-To be explained...
+Here is a simple example that retrieve the neufbox "system" information:
+```python
+from neufbox import Client
+from pprint import pprint
+
+
+client = Client('192.168.0.1')
+system_info = client.system.get_info()
+pprint(system_info)
+```
+
+We can also login to access private information from the neufbox. A ` username_password` helper is provided by the library, which send the credentials (in hashed format) to validate the token received by the client from the neufbox (if the authentication method allows username/password authentication):
+```python
+from neufbox import username_password
+
+client.login(username_password('admin', 'p4ssw0rd'))
+wlan_info = client.wlan.get_info()
+pprint(wlan_info)
+```
+
+The client also allows changing some parameters of the neufbox, by using the setters available in the different namespaces. See the [API specification][api_spec_link] for details.
 
 
 ## Support
@@ -25,6 +47,11 @@ To be explained...
 This project is hosted on [Github][github_link]. Please report issues via the bug tracker.
 
 
-[github_link]:  https://github.com/sprat/neufbox-client
-[travis_image]:  https://travis-ci.com/sprat/neufbox-client.svg?branch=master
+[github_link]:   https://github.com/sprat/neufbox-client
 [travis_link]:   https://travis-ci.com/sprat/neufbox-client
+[pypi_link]:     https://pypi.org/project/neufbox-client
+[api_spec_link]: https://lafibre.info/sfr-les-news/spec-api-rest-box-de-sfr/?action=dlattach;attach=85818
+
+[build_badge]:   https://travis-ci.com/sprat/neufbox-client.svg?branch=master
+[license_badge]: https://img.shields.io/pypi/l/neufbox-client
+[version_badge]: https://img.shields.io/pypi/v/neufbox-client
