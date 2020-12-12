@@ -1,6 +1,6 @@
 # Neufbox API Client
 
-[![Build Status][build_badge]][travis_link]
+[![Build Status][build_badge]][build_link]
 [![License][license_badge]][pypi_link]
 [![Version][version_badge]][pypi_link]
 
@@ -46,12 +46,11 @@ You can also have a look on the [demo](./demo.py) file to see a working example.
 
 This project is hosted on [Github][github_link]. Please report issues via the bug tracker.
 
-
 [github_link]:   https://github.com/sprat/neufbox-client
-[travis_link]:   https://travis-ci.com/sprat/neufbox-client
+[build_link]:    https://github.com/sprat/neufbox-client/actions?query=workflow:CI
 [pypi_link]:     https://pypi.org/project/neufbox-client
 [api_spec_link]: https://lafibre.info/sfr-les-news/spec-api-rest-box-de-sfr/?action=dlattach;attach=85818
 
-[build_badge]:   https://travis-ci.com/sprat/neufbox-client.svg?branch=master
+[build_badge]:   https://img.shields.io/github/workflow/status/sprat/neufbox-client/CI
 [license_badge]: https://img.shields.io/pypi/l/neufbox-client
 [version_badge]: https://img.shields.io/pypi/v/neufbox-client
